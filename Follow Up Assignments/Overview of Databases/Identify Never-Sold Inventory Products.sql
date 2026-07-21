@@ -1,0 +1,3 @@
+SELECT i.product_name FROM inventory_current_stock AS i
+LEFT JOIN sales_transactions AS s ON i.product_id = s.product_id
+WHERE s.product_id IS NULL;
