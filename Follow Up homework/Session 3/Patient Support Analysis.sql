@@ -1,0 +1,4 @@
+select count(distinct policy_holder_id) AS policy_holder_count
+FROM (SELECT policy_holder_id, call_date,LAG(call_date) OVER (partition by policy_holder_id ORDER BY call_date) 
+AS previous_call FROM callers) t
+WHERE call_date <= previous_call + INTERVAL '7 days';
