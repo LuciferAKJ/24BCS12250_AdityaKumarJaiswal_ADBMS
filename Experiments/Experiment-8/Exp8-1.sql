@@ -1,0 +1,19 @@
+-- create a store procedure and try to insert data using store procedure
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100)
+);
+CREATE OR REPLACE PROCEDURE insert_user(p_name VARCHAR, p_email VARCHAR)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    INSERT INTO users (name, email)
+    VALUES (p_name, p_email);
+    
+    COMMIT;
+END;
+$$;
+CALL insert_user('John Doe', 'john.doe@example.com');
+SELECT * FROM users;
